@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
 const { PAGE_URL } = require('../config')
 
+
+
 //ENDPOINT
 usersRouter.post('/', async (req, res) =>{
     console.log(req.body);
@@ -111,7 +113,9 @@ usersRouter.patch('/:id/:token', async (req, res) => {
 });
         return res.status(400).json({ error: 'El link ya expiró. Se ha enviado un nuevo lin de verificació a su correo' });
     }
+
 });
+
 
 
 module.exports = usersRouter;
