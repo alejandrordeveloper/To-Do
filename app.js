@@ -7,13 +7,14 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
+const { MONGO_URI } = require("./config");
 const app = express();
 
 
 
 (async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI_TEST);
+    await mongoose.connect(MONGO_URI);
     console.log('Conectado a Mongo DB');
   } catch(error) {
     console.log(error);
