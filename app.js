@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const usersRouter = require("./controllers/users");
 const loginRouter = require("./controllers/login");
 const { MONGO_URI } = require("./config");
+const { userExtractor } = require("./middleware/auth");
 const app = express();
 
 
@@ -33,18 +34,20 @@ app.use('/', express.static(path.resolve('views', 'home')));
 app.use('/styles', express.static(path.resolve('views', 'styles')));
 app.use('/signup', express.static(path.resolve('views', 'signup')));
 app.use('/login', express.static(path.resolve('views', 'login')));
+app.use('/todos', express.static(path.resolve('views', 'todos')));
 app.use('/components', express.static(path.resolve('views', 'components')));
 app.use('/img', express.static(path.resolve('img')));
 //app.use('/verify/:id/:token', express.static(path.resolve('views', 'verify')));
 app.use('/verify/:id/:token', express.static(path.resolve('views', 'verify')));
 
-app.use(morgan('tiny'));
+
 
 //RUTAS BACKEND
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/todos',userExtractor , todosRouter)
 
-
+app.use(morgan('tiny'));
 
 module.exports = app;
 
