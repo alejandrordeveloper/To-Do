@@ -30,6 +30,8 @@ todosRouter.delete('/:id', async (req, res) => {
     await Todo.findByIdAndDelete(req.params.id)
 
     user.todos = user.todos.filter(todo => todo.id !== req.params.id);
+
+    await user.save();
     
     return res.sendStatus(204);
 })

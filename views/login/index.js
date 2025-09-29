@@ -6,7 +6,7 @@ const errorText = document.querySelector('#error-text');
 form.addEventListener('submit', async e => {
     e.preventDefault();
     try {
-          const user = {
+        const user = {
         email: emailInput.value,
         password: passwordInput.value
     }

@@ -3,7 +3,7 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
-const { PAGE_URL } = require('../config')
+const { PAGE_URL } = require('../config');
 
 
 
