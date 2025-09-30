@@ -45,13 +45,12 @@ form.addEventListener('submit', async e => {
 	invalidCheck.classList.add('hidden');
 
 	// Create list item
-	const { data } = await axios.post('/api/todos/', { text: input.value })
+	const { data } = await axios.post('/api/todos', { text: input.value }, { withCredentials: true })
 	console.log(data);
-	
 
 	const listItem = document.createElement('li');
-	listItem.classList.add('flex', 'flex-row');
 	listItem.id = data.id;
+	listItem.classList.add('flex', 'flex-row');
 	listItem.innerHTML = `
 		<div class="group grow flex flex-row justify-between">
 			<button class="delete-icon w-12 md:w-14 hidden group-hover:flex group-hover:justify-center group-hover:items-center cursor-pointer bg-red-500 origin-left">
@@ -81,8 +80,8 @@ ul.addEventListener('click', async e => {
 
 	// Select delete-icon
 	if (e.target.closest('.delete-icon')) {
-		const li = e.target.closest('.delete-icon').parentElement.parentElement;
-		await axios.delete(`/api/todos/${li.id}`);
+		const li = e.target.closest('.delete-icon').parentElement.parentElement
+		await axios.delete(`/api/todos/${li.id}`, { withCredentials: true });
 		li.remove();
 		todoCount();
 	}
@@ -92,12 +91,12 @@ ul.addEventListener('click', async e => {
 		const checkIcon = e.target.closest('.check-icon');
 		const listItem = checkIcon.parentElement;
 		if (!listItem.classList.contains('line-through')) {
-			await axios.patch(`/api/todos/${listItem.id}`, { checked: true });
+			await axios.patch(`/api/todos/${listItem.id}`, {checked: true}, { withCredentials: true });
 			checkIcon.classList.add('bg-green-400');
 			checkIcon.classList.remove('hover:bg-green-300');
 			listItem.classList.add('line-through', 'text-slate-400', 'dark:text-slate-600');
 		} else {
-			await axios.patch(`/api/todos/${listItem.id}`, { checked: false });
+			await axios.patch(`/api/todos/${listItem.id}`, {checked: false}, { withCredentials: true });
 			checkIcon.classList.remove('bg-green-400');
 			checkIcon.classList.add('hover:bg-green-300');
 			listItem.classList.remove('line-through', 'text-slate-400', 'dark:text-slate-600');
@@ -112,7 +111,7 @@ ul.addEventListener('click', async e => {
 ( async () => {
 	try {
 		const { data } = await axios.get('/api/todos', {
-			withCredentials : true
+			withCredentials: true
 		});
 		
 		data.forEach(todo => {
@@ -134,6 +133,7 @@ ul.addEventListener('click', async e => {
 					</svg>
 				</button>
 			`;
+
 			if (todo.checked) {
 				listItem.children[1].classList.add('bg-green-400');
 				listItem.children[1].classList.remove('hover:bg-green-300');
@@ -145,9 +145,10 @@ ul.addEventListener('click', async e => {
 			}
 
 			ul.append(listItem);
-		});
+		})
 		todoCount();
 	} catch (error) {
-		//window.location.pathname = '/login';
+		//window.location.pathname = '/login'
 	}
+	
 })();

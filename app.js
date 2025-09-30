@@ -10,6 +10,7 @@ const loginRouter = require("./controllers/login");
 const todosRouter = require("./controllers/todos")
 const { MONGO_URI } = require("./config");
 const { userExtractor } = require("./middleware/auth");
+const logoutRouter = require("./controllers/logout");
 const app = express();
 
 
@@ -46,6 +47,7 @@ app.use('/verify/:id/:token', express.static(path.resolve('views', 'verify')));
 //RUTAS BACKEND
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
+app.use('/api/logout', logoutRouter)
 app.use('/api/todos', userExtractor, todosRouter)
 
 app.use(morgan('tiny'));

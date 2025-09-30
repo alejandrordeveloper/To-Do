@@ -21,7 +21,7 @@ todosRouter.post('/', async (req, res) => {
     user.todos = user.todos.concat(savedTodo._id);
     await user.save();
     
-    return res.status(200).json(savedTodo);
+    return res.status(201).json(savedTodo);
 })
 
 todosRouter.delete('/:id', async (req, res) => {

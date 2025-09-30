@@ -106,12 +106,12 @@ navBtn.addEventListener('click', e => {
     }
 })
 
-const closeBtnDescktop = navbar.children[0].children[3].children[0];
+const closeBtnDesktop = navbar.children[0].children[3].children[0];
 const closeBtnMobile = navbar.children[0].children[2].children[0];
 
-closeBtnDescktop.addEventListener('click', async e => {
+closeBtnDesktop.addEventListener('click', async e => {
     try {
-        await axios.get('/api/logout');
+    await axios.get('/api/logout', { withCredentials: true });
         window.location.pathname = '/login';
     } catch (error) {
         console.log(error);
@@ -119,7 +119,7 @@ closeBtnDescktop.addEventListener('click', async e => {
 })
 closeBtnMobile.addEventListener('click', async e => {
     try {
-        await axios.get('/api/logout');
+    await axios.get('/api/logout', { withCredentials: true });
         window.location.pathname = '/login';
     } catch (error) {
         console.log(error);
