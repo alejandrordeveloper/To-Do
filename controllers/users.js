@@ -52,6 +52,11 @@ usersRouter.post('/', async (req, res) =>{
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
     },
+    //PARTE NUEVA SI NO FUNCIONA QUITAR O COMENTAR
+    tls: {
+    rejectUnauthorized: false, // útil en algunos entornos de despliegue
+    },
+  connectionTimeout: 10000, // 10 segundos para evitar timeouts largos
 });
 
 //Wrap in an async IIFE so we can use await.
