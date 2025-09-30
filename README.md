@@ -35,20 +35,40 @@ Aplicación web para gestionar tareas y usuarios con verificación por correo el
 ## Estructura del proyecto
 ```
 app.js
+config.js
 index.js
 package.json
+postcss.config.js
+tailwind.config.js
 controllers/
+  login.js
+  logout.js
+  todos.js
   users.js
 models/
+  todo.js
   user.js
+src/
+  styles.css
 views/
   home/
     index.html
+    Components/
+      nav.js
+      notification.js
+    login/
+      index.html
+      index.js
+    signup/
+      index.html
+      index.js
+    styles/
+      output.css
   verify/
     index.html
-public/
-  styles/
-    output.css
+    index.js
+img/
+  signup.svg
 ```
 
 ## Uso de Tailwind CSS
@@ -60,7 +80,13 @@ public/
 
 ## Endpoints principales
 - `POST /api/users` — Registro de usuario
-- `PATCH /api/users/:id/:token` — Verificación de usuario
+- `GET /api/users/verify/:id/:token` — Verificación de usuario (redirige a login tras verificar)
+- `PATCH /api/users/:id/:token` — Re-verificación manual (si el link expiró)
+
+## Flujo de verificación de correo
+1. El usuario se registra y recibe un email con un enlace de verificación.
+2. Al hacer clic en el enlace, el backend verifica el token y redirige automáticamente a la página de login si la verificación es exitosa.
+3. Si el link expiró, el backend envía un nuevo correo de verificación.
 
 ## Licencia
 Este proyecto es de uso libre para fines educativos.
