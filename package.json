@@ -1,7 +1,6 @@
 {
   "name": "todo-app",
   "version": "1.0.0",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "tailwind-build": "npx tailwindcss -i ./views/home/styles/output.css -o ./src/styles.css --watch",
